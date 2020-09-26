@@ -1,4 +1,4 @@
-# Howto Bluetooth h2dp sink on raspberry 3 with alsa and pin paring
+# Howto Bluetooth a2dp sink on raspberry 3 with alsa and pin paring
 
 Based on information from [1] and [2]
 
@@ -10,6 +10,8 @@ echo -e "1234\n" | sudo tee /etc/bluetooth/pin.conf`
 
 Add a bluetooth agent as service
 `$ vim /etc/systemd/system/bt-agent.service`
+`$ sudo chown root:root /etc/bluetooth/pin.conf`
+`$ sudo chmod 600 /etc/bluetooth/pin.conf`
    
 ```
    [Unit]
