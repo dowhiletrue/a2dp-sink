@@ -16,7 +16,7 @@ and change
 
 Create /etc/bluetooth/pin.conf **WITH** a trailing line
 
-echo -e "* 1234\n" | sudo tee /etc/bluetooth/pin.conf`
+`$ echo -e "* 1234\n" | sudo tee /etc/bluetooth/pin.conf`
 
 Add a bluetooth agent as service
 `$ vim /etc/systemd/system/bt-agent.service`
