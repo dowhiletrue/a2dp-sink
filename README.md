@@ -19,9 +19,11 @@ Create /etc/bluetooth/pin.conf **WITH** a trailing line
 `$ echo -e "* 1234\n" | sudo tee /etc/bluetooth/pin.conf`
 
 Add a bluetooth agent as service
-`$ vim /etc/systemd/system/bt-agent.service`
-`$ sudo chown root:root /etc/bluetooth/pin.conf`
-`$ sudo chmod 600 /etc/bluetooth/pin.conf`
+```
+$ vim /etc/systemd/system/bt-agent.service
+$ sudo chown root:root /etc/bluetooth/pin.conf
+$ sudo chmod 600 /etc/bluetooth/pin.conf
+```
    
 >   [Unit]
 >   Description=Bluetooth Auth Agent
