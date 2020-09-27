@@ -8,7 +8,7 @@ Based on information from [1], [2] and [3]
 
 and change
 
-> ExecStart=/usr/bin/bluealsa -p a2dp-sink
+>    ExecStart=/usr/bin/bluealsa -p a2dp-sink
 
 `$ sudo vim /lib/systemd/system/bluetooth.service`
 
@@ -21,19 +21,20 @@ Create /etc/bluetooth/pin.conf **WITH** a trailing line
 Add a bluetooth agent as service
 `$ vim /etc/systemd/system/bt-agent.service`
    
->    [Unit]
->    Description=Bluetooth Auth Agent
->    After=bluetooth.service
->    PartOf=bluetooth.service
->    
->    [Service]
->    Type=simple
->    ExecStart=/usr/bin/bt-agent -c NoInputNoOutput -p /etc/bluetooth/pin.conf
->    ExecStartPost=/bin/sleep 1
->    ExecStartPost=/bin/hciconfig hci0 sspmode 0
->    
->    [Install]
->    WantedBy=bluetooth.target
+    [Unit]
+    Description=Bluetooth Auth Agent
+    After=bluetooth.service
+    PartOf=bluetooth.service
+    
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/bt-agent -c NoInputNoOutput -p /etc/bluetooth/pin.conf
+    ExecStartPost=/bin/sleep 1
+    ExecStartPost=/bin/hciconfig hci0 sspmode 0
+    
+    [Install]
+    WantedBy=bluetooth.target
+
 ```
 $ sudo chown root:root /etc/bluetooth/pin.conf
 $ sudo chmod 600 /etc/bluetooth/pin.conf
@@ -43,21 +44,21 @@ create service for playback
 
 `$ vim /etc/systemd/system/a2dp-playback.service`
 
->    [Unit]
->    Description=A2DP Playback
->    After=bluealsa.service syslog.service
->    Requires=bluealsa.service
->    
->    [Service]
->    ExecStartPre=/bin/sleep 3
->    ExecStart=/usr/bin/bluealsa-aplay --profile-a2dp 00:00:00:00:00:00
->    StandardOutput=syslog
->    StandardError=syslog
->    SyslogIdentifier=A2DP-Playback
->    User=pi
->    
->    [Install]
->    WantedBy=multi-user.target
+    [Unit]
+    Description=A2DP Playback
+    After=bluealsa.service syslog.service
+    Requires=bluealsa.service
+    
+    [Service]
+    ExecStartPre=/bin/sleep 3
+    ExecStart=/usr/bin/bluealsa-aplay --profile-a2dp 00:00:00:00:00:00
+    StandardOutput=syslog
+    StandardError=syslog
+    SyslogIdentifier=A2DP-Playback
+    User=pi
+    
+    [Install]
+    WantedBy=multi-user.target
 
 start at boot time:
 ```
